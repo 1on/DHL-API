@@ -111,7 +111,7 @@ abstract class Base
 
         foreach ($this->_params as $name => $infos)
         {
-            if ($this->$name)
+            if (!is_null($this->$name))
             {
                 if (is_object($this->$name))
                 {
