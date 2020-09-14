@@ -67,6 +67,27 @@ abstract class Base extends BaseDataType
     );
 
     /**
+     * Parameters to be used in the meta
+     * @var array
+     */
+    protected $_metaParams = array(
+        'SoftwareName' => array(
+            'type' => 'string',
+            'required' => false,
+        ),
+        'SoftwareVersion' => array(
+            'type' => 'string',
+            'required' => false,
+        ),
+    );
+
+    /**
+     * Use metaData or not
+     * @var bool
+     */
+    protected $_withMeta = false;
+
+    /**
      * Parameters to be used in the body 
      * @var array
      */
@@ -119,7 +140,7 @@ abstract class Base extends BaseDataType
      */ 
     public function __construct()
     {
-        $this->_params = array_merge($this->_headerParams, $this->_bodyParams);
+        $this->_params = array_merge($this->_headerParams, $this->_bodyParams, $this->_metaParams);
         $this->initializeValues();
     }
 
@@ -163,7 +184,17 @@ abstract class Base extends BaseDataType
         $xmlWriter->endElement(); // End of Request
         $xmlWriter->endElement(); // End of ServiceHeader
 
-        foreach ($this->_bodyParams as $name => $infos) 
+        if ($this->_withMeta) {
+            $xmlWriter->startElement('MetaData');
+            foreach ($this->_metaParams as $name => $infos) {
+                $xmlWriter->writeElement($name, $this->$name);
+            }
+            $xmlWriter->endElement(); // End of MetaData
+        }
+
+        $xmlWriter->endElement(); // End of Request
+
+        foreach ($this->_bodyParams as $name => $infos)
         {
             if ($this->$name)
             {

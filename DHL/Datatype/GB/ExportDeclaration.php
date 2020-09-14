@@ -87,7 +87,18 @@ class ExportDeclaration extends Base
             'comment' => 'Export reason code (P:Permanent, T:Temporary, R:Re-Export)',
             'length' => '1',
             'enumeration' => 'P,T,R',
-        ), 
+        ),
+        'InvoiceNumber' => array(
+            'type' => 'string',
+            'required' => false,
+            'subobject' => false,
+        ),
+        'InvoiceDate' => array(
+            'type' => 'string',
+            'required' => false,
+            'subobject' => false,
+            'comment' => 'Date in format Y-m-d'
+        ),
         'SedNumber' => array(
             'type' => 'SEDNumber',
             'required' => false,

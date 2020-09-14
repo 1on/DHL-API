@@ -52,13 +52,19 @@ class ShipmentRequest extends Base
      * @var string
      * The schema version
      */
-    protected $_schemaVersion = '1.0';
+    protected $_schemaVersion = '6.2';
 
     /**
      * Display the schema version
      * @var boolean
      */
     protected $_displaySchemaVersion = true;
+
+    /**
+     * Use metaData or not
+     * @var bool
+     */
+    protected $_withMeta = true;
 
     /**
      * Parameters to be send in the body
@@ -117,7 +123,31 @@ class ShipmentRequest extends Base
             'type' => 'Dutiable',
             'required' => false,
             'subobject' => true,
-        ), 
+        ),
+        'UseDHLInvoice' => array(
+            'type' => 'YesNo',
+            'required' => false,
+            'subobject' => false,
+            'comment' => 'Boolean flag',
+            'length' => '1',
+            'enumeration' => 'Y,N',
+        ),
+        'DHLInvoiceLanguageCode' => array(
+            'type' => 'string',
+            'required' => false,
+            'subobject' => false,
+            'minLength' => '2',
+            'maxLength' => '2',
+            'enumeration' => 'ru,en',
+        ),
+        'DHLInvoiceType' => array(
+            'type' => 'string',
+            'required' => false,
+            'subobject' => false,
+            'minLength' => '3',
+            'maxLength' => '3',
+            'enumeration' => 'CMI,PFI',
+        ),
         'ExportDeclaration' => array(
             'type' => 'ExportDeclaration',
             'required' => false,
