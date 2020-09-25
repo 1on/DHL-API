@@ -181,7 +181,6 @@ abstract class Base extends BaseDataType
         {
             $xmlWriter->writeElement($name, $this->$name);
         }
-        $xmlWriter->endElement(); // End of Request
         $xmlWriter->endElement(); // End of ServiceHeader
 
         if ($this->_withMeta) {
