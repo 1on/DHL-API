@@ -88,7 +88,17 @@ class ExportLineItem extends Base
             'comment' => 'Commodity codes for shipment type',
             'minLength' => '1',
             'maxLength' => '20',
-        ), 
+        ),
+        'Weight' => array(
+            'type' => 'Weight',
+            'required' => false,
+            'subobject' => true,
+        ),
+        'GrossWeight' => array(
+            'type' => 'GrossWeight',
+            'required' => false,
+            'subobject' => true
+        ),
         'ScheduleB' => array(
             'type' => 'ScheduleB',
             'required' => false,
@@ -100,12 +110,7 @@ class ExportLineItem extends Base
             'type' => '',
             'required' => false,
             'subobject' => false,
-        ), 
-        'Weight' => array(
-            'type' => '',
-            'required' => false,
-            'subobject' => false,
-        ), 
+        ),
         'License' => array(
             'type' => '',
             'required' => false,
